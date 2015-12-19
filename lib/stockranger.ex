@@ -1,0 +1,2 @@
+defmodule Stockranger do
+end

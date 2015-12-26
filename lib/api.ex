@@ -26,12 +26,19 @@ defmodule Stockranger.Api do
   def stocks(venue) do
     data = api_get("/venues/#{venue}/stocks")
 
-    Enum.map(data["symbols"], fn(stock) -> Stock.create(stock) end)
+    Enum.map(data["symbols"], fn(stock) ->
+      Stock.create(stock, venue)
+    end)
   end
 
   def order_book(venue, stock) do
     api_get("/venues/#{venue}/stocks/#{stock}")
     |> OrderBook.create
+  end
+
+  def quote(venue, stock) do
+    api_get("/venues/#{venue}/stocks/#{stock}/quote")
+    |> Quote.create
   end
 
   defp api_get(url) do

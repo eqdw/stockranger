@@ -41,6 +41,11 @@ defmodule Stockranger.Api do
     |> Quote.create
   end
 
+  def cancel_order(venue, stock, order) do
+    api_delete("/venues/#{venue}/stocks/#{stock}/orders/#{order}"
+    |> Order.create
+  end
+
   defp api_get(url) do
     %HTTPoison.Response{body: body} = get!(url)
     body
@@ -48,6 +53,10 @@ defmodule Stockranger.Api do
 
   defp api_post(url, body, headers) do
     %HTTPoison.Response{body: body} = post!(url, body, headers)
+  end
+
+  defp api_delete(url) do
+    %HTTPoison.Response{body: body} = delete!(url)
   end
 
   defp process_url(url) do

@@ -42,7 +42,7 @@ defmodule Stockranger.Api do
   end
 
   def cancel_order(venue, stock, order) do
-    api_delete("/venues/#{venue}/stocks/#{stock}/orders/#{order}"
+    api_delete("/venues/#{venue}/stocks/#{stock}/orders/#{order}")
     |> Order.create
   end
 
